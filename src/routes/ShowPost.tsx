@@ -24,6 +24,7 @@ const ShowPost = () => {
       )}
       <p>{post.body}</p>
       <p>{post.author.userName}</p>
+      {post.comments?.map(comment => <p key={comment._id}>{comment.body} - {comment.author.userName}</p>)}
     </div>
   )
 }
