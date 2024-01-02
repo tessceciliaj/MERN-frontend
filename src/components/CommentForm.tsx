@@ -38,7 +38,7 @@ const CommentForm = ({ postId }: { postId: string }) => {
     }
 
     return (
-        <div>
+        <div className="m-4 flex flex-col gap-4">
             <h3>Leave a comment</h3>
             <fetcher.Form method="post" action={`/posts/${postId}/comments`}>
                 <div>

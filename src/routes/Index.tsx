@@ -28,7 +28,7 @@ const Index = () => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold">Welcome soldie!</h3>
+      <h3 className="text-lg font-semibold">Welcome!</h3>
       <div className="flex flex-wrap gap-4 justify-center p-4">
         {data?.posts.map((post) => <PostListItem post={post} key={post._id}/>)}
         <Paginator 

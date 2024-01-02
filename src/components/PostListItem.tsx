@@ -4,8 +4,9 @@ import VoteComponent from './Vote';
 
 const PostListItem = ({post}: {post: Post}) => {
   return (
-    <div className="flex flex-col p-4 border-2 border-white">
+    <div className="flex gap-4 p-4 border-2 border-white">
       <VoteComponent post={post} />
+      <div className="flex flex-col">
       { post.link ? (
         <Link to={post.link}>
             <h2 className="text-3xl">{post.title}</h2>
@@ -19,6 +20,7 @@ const PostListItem = ({post}: {post: Post}) => {
        {post.link && (
         <span><Link to={`/posts/${post._id}`}></Link></span>
        )}
+       </div>
     </div>
   )
 }

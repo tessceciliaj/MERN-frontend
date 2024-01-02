@@ -57,8 +57,11 @@ const ShowPost = () => {
 
   return (
     <>
-      <div>
+      <div className="flex flex-col">
+        <div  className="flex items-center justify-center gap-8">
+          <div className="absolute left-10">
         <VoteComponent post={post} />
+        </div>
         <div>
           {post.link ? (
             <Link to={post.link}>
@@ -68,12 +71,12 @@ const ShowPost = () => {
               </h2>
             </Link>
           ) : (
-            <h2>{post.title}</h2>
+            <h2 className="text-xl">{post.title}</h2>
           )}
-          <p>by {post.author.userName}</p>
+          <p className="text-gray-400">by {post.author.userName}</p>
           {post.body && (
             <div>
-              <p>{post.body}</p>
+              <p className="my-10">{post.body}</p>
             </div>
           )}
               {post.image && (
@@ -83,6 +86,7 @@ const ShowPost = () => {
                   }`}
                 />
               )}
+        </div>
         </div>
         <div className="flex gap-4 justify-center items-center">
          {!showUpdatePost && <button onClick={toggleUpdatePost}>Update Post</button>} 
