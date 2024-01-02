@@ -1,29 +1,41 @@
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom"
+import { LoaderFunctionArgs, useLoaderData, useSearchParams } from "react-router-dom"
 import { Post } from "../types"
 import PostListItem from "../components/PostListItem"
+import Paginator from "../components/Paginator";
 
-export const loader = async (args: LoaderFunctionArgs) => {
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts', {
+export const loader = async ({request}: LoaderFunctionArgs) => {
+  const url = new URL(request.url)
+  const pageParam = url.searchParams.get('page');
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+
+  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts?page=' + page, {
     headers: {
       'Accepts': 'application/json'
     }
   })
 
 
-  return await response.json()
+  const backendResponse = await response.json() as { posts: Post[], totalPages: number };
+
+  return { page, ...backendResponse }
 
 }
 
 
 const Index = () => {
-  const data = useLoaderData() as { posts: Post[], totalPages: number } | undefined
+  const data = useLoaderData() as Awaited<ReturnType<typeof loader>>;  
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <div>
       <h3 className="text-lg font-semibold">Welcome soldie!</h3>
       <div className="flex flex-wrap gap-4 justify-center p-4">
         {data?.posts.map((post) => <PostListItem post={post} key={post._id}/>)}
-        <p>Pages {data?.totalPages}</p>
+        <Paginator 
+                currentPage={data.page}
+                totalPages={data?.totalPages} 
+                setPage={(page) => setSearchParams({ ...searchParams, page: page.toString() })}
+                />
         </div>
     </div>
   )

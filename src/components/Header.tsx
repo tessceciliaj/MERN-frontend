@@ -8,7 +8,9 @@ const Header = () => {
 
   return (
     <div className='flex justify-between w-full items-center p-4'>
-    <h1 className='font-semibold'>PageTitle</h1>
+      <Link to={'/'}>
+  <h1 className='font-semibold'>PageTitle</h1>
+    </Link>
     <div>
       {isAuthenticated ?  
         <>

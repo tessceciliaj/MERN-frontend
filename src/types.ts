@@ -14,9 +14,13 @@ export interface Post {
     title: string,
     link?: string,
     body: string,
+    image?: {
+      id: string
+    }
     author: {
       _id: string;
       userName: string;
     }
-    comments?: Comment[]
+    comments?: Comment[];
+    score: number;
   }
