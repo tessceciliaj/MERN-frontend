@@ -1,5 +1,5 @@
 import { Comment } from '../types';
-import { ActionFunctionArgs, redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import auth from '../lib/auth';
 
 export const deleteComment = async ({ postId, commentId }: { postId: string; commentId: string }) => {
