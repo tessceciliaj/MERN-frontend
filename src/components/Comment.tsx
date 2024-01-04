@@ -1,5 +1,6 @@
 import { Comment } from '../types'
 
+
 const CommentComponent = ({comment}: {comment: Comment}) => {
   return (
     <div>

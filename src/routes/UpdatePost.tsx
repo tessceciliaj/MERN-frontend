@@ -4,56 +4,52 @@ import { ActionFunctionArgs, redirect } from "react-router-dom";
 import auth from "../lib/auth";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-    const { id } = params;
-    const formData = await request.formData();
+  const formData = await request.formData();
+  const { id } = params;
+  const postData = Object.fromEntries(formData.entries());
 
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${auth.getJWT()}`,
-        },
-        body: formData,
-    });
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth.getJWT()}`,
+    },
+    body: JSON.stringify(postData),
+  });
 
-    if (!response.ok) {
-        const { message } = await response.json();
-        return { message };
-    }
+  if (!response.ok) {
+    const { message } = await response.json();
+    return { message };
+  }
 
-    return redirect('/');
+  return redirect(`/posts/${id}`);
 };
 
-
 const UpdatePost = () => {
-    const { id } = useParams();
-    const [formData, setFormData] = useState({
-      title: '',
-      link: '',
-      body: '',
-    });
-  
-    useEffect(() => {
-      const fetchPost = async () => {
-        try {
-          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`);
-          if (response.ok) {
-            const postData = await response.json();
-  
-            setFormData({
-              title: postData.title || '', 
-              link: postData.link || '',
-              body: postData.body || '',
-            });
-          } else {
-            console.error('Failed to fetch post data');
-          }
-        } catch (error) {
-          console.error('Fetch Error:', error);
+  const { id } = useParams();
+  const [formData, setFormData] = useState({
+    title: '',
+    link: '',
+    body: '',
+  });
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`);
+        if (response.ok) {
+          const postData = await response.json();
+          setFormData(postData);
+        } else {
+          console.error('Failed to fetch post data');
         }
-      };
-  
-      fetchPost();
-    }, [id]);
+      } catch (error) {
+        console.error('Fetch Error:', error);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -69,13 +65,13 @@ const UpdatePost = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${auth.getJWT()}`,
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         console.log('Post updated successfully');
-        // redirect or perform other actions after successful update
       } else {
         console.error('Failed to update post');
       }

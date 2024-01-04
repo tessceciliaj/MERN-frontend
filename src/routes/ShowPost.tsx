@@ -9,12 +9,13 @@ import auth from "../lib/auth";
 
 export const loader = async (args: LoaderFunctionArgs) => {
   const { id } = args.params;
+  
 
   const response = await fetch(
     import.meta.env.VITE_BACKEND_URL + "/posts/" + id,
     {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     }
   );

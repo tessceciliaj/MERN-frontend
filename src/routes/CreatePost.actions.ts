@@ -3,6 +3,7 @@ import auth from "../lib/auth";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
+    console.log(Object.fromEntries(formData.entries()))
 
     const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts', {
         method: 'POST',
@@ -11,6 +12,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
         body: formData,
     });
+    console.log(response)
 
     if (!response.ok) {
         const { message } = await response.json();
