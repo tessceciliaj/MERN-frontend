@@ -12,7 +12,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   
 
   const response = await fetch(
-    import.meta.env.VITE_BACKEND_URL + "/posts/" + id,
+    import.meta.env.VITE_BACKEND_URL + "posts/" + id,
     {
       headers: {
         "Content-Type": "multipart/form-data",

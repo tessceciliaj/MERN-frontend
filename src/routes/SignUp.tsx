@@ -11,7 +11,7 @@ import { ActionFunctionArgs, Form, redirect, useActionData } from 'react-router-
     return {message: 'Passwords are not the same'}
   }
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/register', {
+  const response = await fetch(import.meta.env.VITE_BACKEND_URL + 'register', {
     headers: {
       'Content-Type': 'application/json'
     }, 

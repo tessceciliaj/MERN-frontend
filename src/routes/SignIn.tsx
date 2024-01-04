@@ -7,7 +7,7 @@ import auth from '../lib/auth';
   const username = formData.get('username')
   const password = formData.get('password')
   
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/login', {
+  const response = await fetch(import.meta.env.VITE_BACKEND_URL + 'login', {
     headers: {
       'Content-Type': 'application/json'
     }, 
