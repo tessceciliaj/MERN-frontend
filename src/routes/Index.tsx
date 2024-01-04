@@ -8,7 +8,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
   const pageParam = url.searchParams.get('page');
     const page = pageParam ? parseInt(pageParam, 10) : 1;
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts?page=' + page, {
+  const response = await fetch(import.meta.env.VITE_BACKEND_URL + 'posts?page=' + page, {
     headers: {
       'Accepts': 'application/json'
     }
