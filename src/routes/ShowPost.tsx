@@ -47,7 +47,7 @@ const ShowPost = () => {
   const handleDeletePost = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/posts/${post._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}posts/${post._id}`,
         {
           method: 'DELETE',
           headers: {
