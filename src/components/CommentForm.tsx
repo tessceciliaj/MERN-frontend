@@ -75,7 +75,7 @@ const CommentForm = ({ postId }: { postId: string }) => {
 	return (
 		<div>
 			<h3 className="">Leave a comment</h3>
-			<fetcher.Form method="post" action={`posts/${postId}/comments`}>
+			<fetcher.Form method="post" action={`/posts/${postId}/comments`}>
 				<div>
 					<textarea
 						className=""
