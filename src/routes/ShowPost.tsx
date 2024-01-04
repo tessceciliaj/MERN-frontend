@@ -1,7 +1,7 @@
 import { Link, LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
 import { Post } from "../types";
 import CommentForm from "../components/CommentForm";
-import CommentComponent from "../components/Comment";
+import CommentComponent, { deleteComment } from "../components/Comment";
 import VoteComponent from "../components/Vote";
 import UpdatePost from "./UpdatePost";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   );
 
   const posts = await response.json();
-
+  console
   return posts;
 };
 
@@ -31,7 +31,19 @@ const ShowPost = () => {
 
   const toggleUpdatePost = () => {
     setShowUpdatePost((prevState) => !prevState);
+  };  
+
+  const handleDeleteComment = async (commentId: string) => {
+    console.log(commentId)
+
+    try {
+      await deleteComment({ postId: post._id, commentId: commentId });
+    
+    } catch (error) {
+      console.log(error)
+    }
   };
+
   const handleDeletePost = async () => {
     try {
       const response = await fetch(
@@ -54,6 +66,8 @@ const ShowPost = () => {
     }
     return redirect('/')
   };
+
+
   
 
   return (
@@ -97,7 +111,7 @@ const ShowPost = () => {
       </div>
       <CommentForm postId={post._id} />
       {post.comments?.map((comment) => (
-        <CommentComponent key={comment._id} comment={comment} />
+       <CommentComponent comment={comment} handleDeleteComment={handleDeleteComment} />
       ))}
     </>
   );
