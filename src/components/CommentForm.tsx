@@ -8,7 +8,7 @@ export const action = async (args: ActionFunctionArgs) => {
 	const formData = await args.request.formData()
 
 	const response = await fetch(
-		import.meta.env.VITE_BACKEND_URL + "/posts/" + postId + "/comments",
+		import.meta.env.VITE_BACKEND_URL + "posts/" + postId + "/comments",
 		{
 			headers: {
 				"Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const updateComment = async (args: ActionFunctionArgs) => {
 
 	const response = await fetch(
 		import.meta.env.VITE_BACKEND_URL +
-			"/posts/" +
+			"posts/" +
 			postId +
 			"/comments/" +
 			commentId,
@@ -75,7 +75,7 @@ const CommentForm = ({ postId }: { postId: string }) => {
 	return (
 		<div>
 			<h3 className="">Leave a comment</h3>
-			<fetcher.Form method="post" action={`/posts/${postId}/comments`}>
+			<fetcher.Form method="post" action={`posts/${postId}/comments`}>
 				<div>
 					<textarea
 						className=""

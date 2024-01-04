@@ -8,7 +8,7 @@ export const action = async (args: ActionFunctionArgs) => {
 
     const vote = formData.get('vote');
 
-    const path = vote === 'up' ? `/posts/${postId}/upvote` : `/posts/${postId}/downvote`;
+    const path = vote === 'up' ? `posts/${postId}/upvote` : `posts/${postId}/downvote`;
 
     const response = await fetch(import.meta.env.VITE_BACKEND_URL + path, {
         headers: {
@@ -30,7 +30,7 @@ const VoteComponent = ({post}: {post: Post}) => {
 
     return (
         <div>
-            <Form method="post" action={`/posts/${post._id}/vote`}>
+            <Form method="post" action={`posts/${post._id}/vote`}>
                 <input type="hidden" name="returnTo" value={location.pathname + location.search} />
                 <input type="hidden" value="up" name="vote" />
                 <button type="submit">↑</button>

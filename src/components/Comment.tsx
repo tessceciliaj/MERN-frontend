@@ -5,7 +5,7 @@ import auth from '../lib/auth';
 export const deleteComment = async ({ postId, commentId }: { postId: string; commentId: string }) => {
   try {
     const response = await fetch(
-      import.meta.env.VITE_BACKEND_URL + `/posts/${postId}/comments/${commentId}`,
+      import.meta.env.VITE_BACKEND_URL + `posts/${postId}/comments/${commentId}`,
       {
         headers: {
           Authorization: `Bearer ${auth.getJWT()}`,
@@ -19,7 +19,7 @@ export const deleteComment = async ({ postId, commentId }: { postId: string; com
       throw new Error(message);
     }
 
-    return redirect(`/posts/${postId}`);
+    return redirect(`posts/${postId}`);
   } catch (error) {
     console.error('Error deleting comment:', error);
     throw error;
