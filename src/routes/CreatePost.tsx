@@ -8,7 +8,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
    // Hämtar ut nyckelvärden och gör ett nytt objekt
     const postData = Object.fromEntries(formData.entries())
 
-    const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts', {
+    const response = await fetch(import.meta.env.VITE_BACKEND_URL + 'posts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

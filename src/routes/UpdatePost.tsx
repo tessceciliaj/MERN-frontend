@@ -8,7 +8,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const { id } = params;
   const postData = Object.fromEntries(formData.entries());
 
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}posts/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     return { message };
   }
 
-  return redirect(`/posts/${id}`);
+  return redirect(`posts/${id}`);
 };
 
 const UpdatePost = () => {
@@ -36,7 +36,7 @@ const UpdatePost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}posts/${id}`);
         if (response.ok) {
           const postData = await response.json();
           setFormData(postData);
@@ -69,7 +69,7 @@ const UpdatePost = () => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}posts/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
