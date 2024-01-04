@@ -51,7 +51,15 @@ const UpdatePost = () => {
     fetchPost();
   }, [id]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -102,7 +110,7 @@ const UpdatePost = () => {
       <textarea
         name="body"
         value={formData.body}
-        onChange={handleInputChange}
+        onChange={handleTextAreaChange}
       ></textarea>
       <button onClick={handleUpdate}>Save Changes</button>
     </div>
